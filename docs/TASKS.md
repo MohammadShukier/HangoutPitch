@@ -1,11 +1,15 @@
 # Tasks
 
 ## Handoff (rewritten at the end of every task — max 8 lines)
-Project scaffolded by the user (Expo SDK 58, template reset, packages installed). Nothing app-specific built yet. Start with T0.
+T0 done: src folders exist (context/data/utils still empty). `src/constants/colors.js` exports `colors`, `statusColors` (Idea/Voting/Confirmed), `sizes` (padding 20, radius 12, cardRadius 16, heading 30, body/label 16).
+Base components: `AppScreen({ children, centered })`, `AppButton({ text, onPress, style, variant, disabled })` (primary/secondary/danger), `AppTextInput` (forwards all props).
+Root `_layout.jsx`: Stack with orange header, white bold title, cream `contentStyle`; only `index` registered (title "HangoutPitch"). `index.jsx` = temp placeholder.
+ESLint set up (`eslint.config.js`). Gotcha: run lint as `CI=1 npx expo lint`, plain `npx expo lint` can hang waiting on a prompt.
+Next (T1): mockOutings.js + OutingsProvider wrapped around the Stack in `_layout.jsx`.
 
 ---
 
-- [ ] **T0 — Base setup**
+- [x] **T0 — Base setup**
   - Make sure `src/app/`, `src/components/`, `src/context/`, `src/data/`, `src/utils/`, `src/constants/` exist. Delete any leftover template demo files the app won't use.
   - `src/constants/colors.js`: own HangoutPitch palette (primary, background, card, text, muted, border, error, success) + one color per status (Idea/Voting/Confirmed).
   - Copy the class base components into `src/components/` in the class style, using colors.js: `AppScreen`, `AppButton` (add optional `variant`: primary/secondary/danger, and `disabled`), `AppTextInput`.

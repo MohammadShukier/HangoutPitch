@@ -1,5 +1,18 @@
 import { Stack } from "expo-router";
+import { colors } from "../constants/colors";
 
 export default function RootLayout() {
-  return <Stack />;
+  // Header style is set once here so every screen matches.
+  return (
+    <Stack
+      screenOptions={{
+        headerStyle: { backgroundColor: colors.primary },
+        headerTintColor: colors.white,
+        headerTitleStyle: { fontWeight: "bold" },
+        contentStyle: { backgroundColor: colors.background },
+      }}
+    >
+      <Stack.Screen name="index" options={{ title: "HangoutPitch" }} />
+    </Stack>
+  );
 }

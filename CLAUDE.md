@@ -25,9 +25,7 @@ Mock data + AsyncStorage only. No backend, no real auth, no external APIs.
 Once the user confirms the tests pass (or says "skip"):
 1. In `docs/TASKS.md`: tick the task, then REWRITE the Handoff section (max 8 lines: what exists now, gotchas, anything the next task needs).
 2. If you created/renamed files, update the File map below.
-3. Print `✅ COMMIT NOW` and the exact commands. If the task had separate logical parts, give 2–3 commits, each with its own `git add <files>` and message.
-   Message style: `feat: …`, `fix: …`, `style: …`, `docs: …`, `chore: …` — one clear line.
-4. Last line: `🧹 SAFE TO CLEAR — TASKS.md updated.` Never say this before step 1 is done.
+3. Last line: `🧹 SAFE TO CLEAR — TASKS.md updated.` Never say this before step 1 is done.
 
 ## Architecture (fixed — don't redesign)
 - `src/app/` = routes only. Components in `src/components/`, other code in `src/context/`, `src/data/`, `src/utils/`, `src/constants/`.
@@ -74,4 +72,10 @@ src/app/outing/form.jsx       Add/Edit — edit mode when ?id= is present
 ```
 
 ## File map (keep updated)
-_(filled in as tasks complete)_
+- `src/constants/colors.js` — `colors`, `statusColors`, `sizes`
+- `src/components/AppScreen.jsx` — screen wrapper (bg, ScrollView, padding, `centered`)
+- `src/components/AppButton.jsx` — button (`variant`: primary/secondary/danger, `disabled`)
+- `src/components/AppTextInput.jsx` — styled TextInput, forwards props
+- `src/app/_layout.jsx` — root Stack + header style
+- `src/app/index.jsx` — placeholder (becomes Welcome in T2)
+- `eslint.config.js` — created by `expo lint`

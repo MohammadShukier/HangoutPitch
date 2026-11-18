@@ -41,3 +41,11 @@ example
 # generated native folders
 /ios
 /android
+
+# AI assistant files (kept local, not in the repo)
+CLAUDE.md
+.claude/
+AGENTS.md
+docs/TASKS.md
+docs/CONVENTIONS.md
+docs/VIDEO_NOTES.md

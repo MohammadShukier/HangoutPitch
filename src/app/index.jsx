@@ -1,17 +1,21 @@
-import { Text, View, StyleSheet } from "react-native";
+import { StyleSheet, Text } from "react-native";
+import AppScreen from "../components/AppScreen";
+import { colors, sizes } from "../constants/colors";
 
+// Temporary placeholder until the Welcome screen is built (T2).
 export default function Index() {
   return (
-    <View style={styles.container}>
-      <Text>Edit src/app/index.tsx to edit this screen.</Text>
-    </View>
+    <AppScreen centered>
+      <Text style={styles.title}>HangoutPitch</Text>
+    </AppScreen>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+  title: {
+    fontSize: sizes.heading,
+    fontWeight: "bold",
+    color: colors.text,
+    textAlign: "center",
   },
 });
