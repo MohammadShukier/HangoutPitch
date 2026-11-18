@@ -73,7 +73,7 @@ src/app/outing/form.jsx       Add/Edit — edit mode when ?id= is present
 
 ## File map (keep updated)
 - `src/constants/colors.js` — `colors`, `statusColors`, `sizes`
-- `src/constants/outingOptions.js` — `outingStatuses`, `outingTypes`, `typeIcons`
+- `src/constants/outingOptions.js` — `outingStatuses`, `outingTypes`, `typeIcons`, `responseOptions`
 - `src/components/AppScreen.jsx` — screen wrapper (bg, ScrollView, padding, `centered`)
 - `src/components/AppButton.jsx` — button (`variant`: primary/secondary/danger, `disabled`)
 - `src/components/AppTextInput.jsx` — styled TextInput, forwards props
@@ -82,15 +82,19 @@ src/app/outing/form.jsx       Add/Edit — edit mode when ?id= is present
 - `src/components/SearchBar.jsx` — search input `{ value, onChangeText }`
 - `src/components/OutingFilters.jsx` — horizontal chips `{ options, selected, onChange }`
 - `src/components/EmptyState.jsx` — `{ title, message, actionText, onAction }`
+- `src/components/ResponseSelector.jsx` — 3 RSVP buttons `{ value, onChange }`
 - `src/data/mockOutings.js` — 8 sample outings (default export)
 - `src/data/mockUser.js` — mock account `{ name, email, password }` (default export)
 - `src/context/OutingsContext.jsx` — `OutingsProvider` (default) + `useOutings()`, AsyncStorage load/save
 - `src/context/AuthContext.jsx` — `AuthProvider` (default) + `useAuth()`
-- `src/utils/validation.js` — `loginSchema`
+- `src/components/OutingForm.jsx` — add/edit form `{ initialValues, submitText, onSubmit }` (Zod field errors)
+- `src/utils/validation.js` — `loginSchema`, `outingSchema`
 - `src/app/_layout.jsx` — AuthProvider + OutingsProvider + root Stack + header style
 - `src/app/index.jsx` — Welcome
 - `src/app/login.jsx` — Login (Zod field errors + wrong-credentials message)
 - `src/app/(tabs)/_layout.jsx` — auth guard + Tabs (Home, Profile)
 - `src/app/(tabs)/index.jsx` — Home: New outing, search, status/type filters, cards, 2 empty states, loading, error
 - `src/app/(tabs)/profile.jsx` — name, email, outings count, Logout confirm
+- `src/app/outing/[id].jsx` — Details: info, RSVP counts + list, my RSVP, Edit, Delete confirm, not-found
+- `src/app/outing/form.jsx` — Add/Edit screen (edit when `?id=`), not-found, own title
 - `eslint.config.js` — created by `expo lint`

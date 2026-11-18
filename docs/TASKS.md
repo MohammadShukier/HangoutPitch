@@ -1,14 +1,14 @@
 # Tasks
 
 ## Handoff (rewritten at the end of every task — max 8 lines)
-T0–T3 done. Base: `AppScreen({ children, centered })`, `AppButton({ text, onPress, style, variant, disabled })`, `AppTextInput`; `colors`/`statusColors`/`sizes` in colors.js.
+T0–T5 done. Base: `AppScreen({ children, centered })`, `AppButton({ text, onPress, style, variant, disabled })`, `AppTextInput`; `colors`/`statusColors`/`sizes` in colors.js.
 `useOutings()` → `{ outings, isLoaded, error, addOuting(outing) (assigns id), updateOuting(id, changes), deleteOuting(id), setMyResponse(id, name, response) }`; `error` is a string ("" = none).
-`useAuth()` → `{ user: { name, email } | null, login(email, password) → bool, logout() }`. Root: AuthProvider > OutingsProvider > Stack (registers `index`, `login`, `(tabs)`). T4/T5: register `outing/[id]` + `outing/form` there.
-`constants/outingOptions.js`: `outingStatuses`, `outingTypes`, `typeIcons`. Reuse for Zod enums (T5) and the form chips.
-Components: `StatusBadge({ status })` (reuse in T4), `OutingCard`, `SearchBar`, `OutingFilters({ options, selected, onChange })` — caller adds "All" itself, so T5 can pass plain options. `EmptyState({ title, message, actionText, onAction })`.
-Home pushes `{ pathname: "/outing/[id]", params: { id } }` and `"/outing/form"` (both unmatched until T4/T5). Field-error pattern in login.jsx — reuse in T5.
-Gotchas: Lint = `CI=1 npx expo lint`. "No outings yet" state untested (needs Delete from T4). Back on Home → Welcome (still logged in) — revisit in T6.
-Next (T4): Details screen.
+`useAuth()` → `{ user: { name, email } | null, login, logout }`. Screens outside tabs (`outing/[id]`, `outing/form`) do their own `!user` → `<Redirect href="/login" />`.
+Form: `OutingForm({ initialValues, submitText, onSubmit })` validates with `outingSchema` and passes `result.data` (trimmed, cost as number) to `onSubmit`. Empty cost box = 0 (Free).
+`outing/form.jsx`: add mode (`emptyOuting`, user added as going, "Outing added" Alert → back) / edit mode (`?id=`, `updateOuting` → back). Title via `<Stack.Screen options={{ title }} />` in every branch.
+`error` is shown on Home + Details only (not on the form/profile) — check during T6 save-failure test.
+Gotchas: Lint = `CI=1 npx expo lint`. Back on Home → Welcome (still logged in) — fix in T6.
+Next (T6): Requirements pass.
 
 ---
 
@@ -39,13 +39,13 @@ Next (T4): Details screen.
   - While `isLoaded` is false show ActivityIndicator. Show `error` if set.
   - "New outing" button → `/outing/form`. Card → `/outing/[id]`.
 
-- [ ] **T4 — Details screen**
+- [x] **T4 — Details screen**
   - Look up by `Number(id)`. All fields; cost "Free" when 0; status badge; RSVP counts (Going/Maybe/Can't) + friend list.
   - `ResponseSelector({ value, onChange })` with 3 buttons, current one highlighted → `setMyResponse`.
   - Edit → `/outing/form?id=…`. Delete → Alert confirm → `deleteOuting` → back (with canGoBack fallback).
   - Unknown id → "Outing not found" + Back button. Header title "Outing details".
 
-- [ ] **T5 — Add/Edit form**
+- [x] **T5 — Add/Edit form**
   - `outingSchema` in validation.js: title 3–60, type enum, location required ≤80, cost 0–10000 (text input → `z.coerce.number`), date `YYYY-MM-DD` and a real date, status enum, notes ≤300 optional.
   - `OutingForm({ initialValues, submitText, onSubmit })` component used for both modes. Type and status chosen with `OutingFilters`-style chips (reuse it). Errors under each field.
   - Add: user added as "going"; success `Alert` → back. Edit: details screen shows the new data immediately.

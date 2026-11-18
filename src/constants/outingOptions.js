@@ -1,4 +1,4 @@
-// The allowed values for an outing. Used by the filters now and the form (T5) later.
+// The allowed values for an outing. Used by the filters, the form chips and the Zod schema.
 export const outingStatuses = ["Idea", "Voting", "Confirmed"];
 
 export const outingTypes = ["Hike", "Food", "Game night", "Beach", "Movie", "Other"];
