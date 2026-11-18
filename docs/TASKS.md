@@ -1,11 +1,14 @@
 # Tasks
 
 ## Handoff (rewritten at the end of every task — max 8 lines)
-T0 done: src folders exist (context/data/utils still empty). `src/constants/colors.js` exports `colors`, `statusColors` (Idea/Voting/Confirmed), `sizes` (padding 20, radius 12, cardRadius 16, heading 30, body/label 16).
-Base components: `AppScreen({ children, centered })`, `AppButton({ text, onPress, style, variant, disabled })` (primary/secondary/danger), `AppTextInput` (forwards all props).
-Root `_layout.jsx`: Stack with orange header, white bold title, cream `contentStyle`; only `index` registered (title "HangoutPitch"). `index.jsx` = temp placeholder.
-ESLint set up (`eslint.config.js`). Gotcha: run lint as `CI=1 npx expo lint`, plain `npx expo lint` can hang waiting on a prompt.
-Next (T1): mockOutings.js + OutingsProvider wrapped around the Stack in `_layout.jsx`.
+T0+T1 done. `colors.js`: `colors`, `statusColors`, `sizes`. Base components: `AppScreen({ children, centered })`, `AppButton({ text, onPress, style, variant, disabled })`, `AppTextInput`.
+`mockOutings.js` (default export): 8 outings, ids 1–8, friends Rawad/Lara/Karim/Nour/Jad/Maya/Hadi/Sara; "Mohammad" has replies in ids 2, 5, 8.
+`OutingsContext.jsx`: default `OutingsProvider` + named `useOutings()` → `{ outings, isLoaded, error, addOuting(outing), updateOuting(id, changes), deleteOuting(id), setMyResponse(id, name, response) }`.
+`addOuting` assigns the id itself (caller passes outing without id). `setMyResponse` takes the name as a param (pass `user.name`). `error` is a string ("" = none).
+Root `_layout.jsx`: `OutingsProvider` wraps the Stack (T2: add `AuthProvider` around it too). Only `index` registered; `index.jsx` = plain placeholder again.
+Gotcha: user's phone storage is now `[]` (persistence test) → to see mock data again clear Expo Go storage.
+Gotcha: run lint as `CI=1 npx expo lint` (plain one can hang on a prompt).
+Next (T2): auth flow.
 
 ---
 
@@ -17,7 +20,7 @@ Next (T1): mockOutings.js + OutingsProvider wrapped around the Stack in `_layout
   - Run `npx expo lint` once (it may set up ESLint on first run — accept).
   - Done when: app opens on the phone showing the placeholder with the styled header.
 
-- [ ] **T1 — Data layer**
+- [x] **T1 — Data layer**
   - `src/data/mockOutings.js`: 8 realistic outings (shape in CLAUDE.md), every status and type used, real places in Lebanon, 3–6 friend responses each.
   - `src/context/OutingsContext.jsx` + `useOutings()` hook, with the API and the persistence rules from CLAUDE.md. Wrap the Stack in `_layout.jsx`.
   - Temporary: placeholder screen shows `outings.length` and a "Delete all" button.

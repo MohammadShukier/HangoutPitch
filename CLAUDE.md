@@ -76,6 +76,8 @@ src/app/outing/form.jsx       Add/Edit — edit mode when ?id= is present
 - `src/components/AppScreen.jsx` — screen wrapper (bg, ScrollView, padding, `centered`)
 - `src/components/AppButton.jsx` — button (`variant`: primary/secondary/danger, `disabled`)
 - `src/components/AppTextInput.jsx` — styled TextInput, forwards props
-- `src/app/_layout.jsx` — root Stack + header style
+- `src/data/mockOutings.js` — 8 sample outings (default export)
+- `src/context/OutingsContext.jsx` — `OutingsProvider` (default) + `useOutings()`, AsyncStorage load/save
+- `src/app/_layout.jsx` — OutingsProvider + root Stack + header style
 - `src/app/index.jsx` — placeholder (becomes Welcome in T2)
 - `eslint.config.js` — created by `expo lint`
