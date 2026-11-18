@@ -77,7 +77,14 @@ src/app/outing/form.jsx       Add/Edit — edit mode when ?id= is present
 - `src/components/AppButton.jsx` — button (`variant`: primary/secondary/danger, `disabled`)
 - `src/components/AppTextInput.jsx` — styled TextInput, forwards props
 - `src/data/mockOutings.js` — 8 sample outings (default export)
+- `src/data/mockUser.js` — mock account `{ name, email, password }` (default export)
 - `src/context/OutingsContext.jsx` — `OutingsProvider` (default) + `useOutings()`, AsyncStorage load/save
-- `src/app/_layout.jsx` — OutingsProvider + root Stack + header style
-- `src/app/index.jsx` — placeholder (becomes Welcome in T2)
+- `src/context/AuthContext.jsx` — `AuthProvider` (default) + `useAuth()`
+- `src/utils/validation.js` — `loginSchema`
+- `src/app/_layout.jsx` — AuthProvider + OutingsProvider + root Stack + header style
+- `src/app/index.jsx` — Welcome
+- `src/app/login.jsx` — Login (Zod field errors + wrong-credentials message)
+- `src/app/(tabs)/_layout.jsx` — auth guard + Tabs (Home, Profile)
+- `src/app/(tabs)/index.jsx` — placeholder Home (list in T3)
+- `src/app/(tabs)/profile.jsx` — name, email, outings count, Logout confirm
 - `eslint.config.js` — created by `expo lint`

@@ -1,14 +1,14 @@
 # Tasks
 
 ## Handoff (rewritten at the end of every task — max 8 lines)
-T0+T1 done. `colors.js`: `colors`, `statusColors`, `sizes`. Base components: `AppScreen({ children, centered })`, `AppButton({ text, onPress, style, variant, disabled })`, `AppTextInput`.
-`mockOutings.js` (default export): 8 outings, ids 1–8, friends Rawad/Lara/Karim/Nour/Jad/Maya/Hadi/Sara; "Mohammad" has replies in ids 2, 5, 8.
-`OutingsContext.jsx`: default `OutingsProvider` + named `useOutings()` → `{ outings, isLoaded, error, addOuting(outing), updateOuting(id, changes), deleteOuting(id), setMyResponse(id, name, response) }`.
-`addOuting` assigns the id itself (caller passes outing without id). `setMyResponse` takes the name as a param (pass `user.name`). `error` is a string ("" = none).
-Root `_layout.jsx`: `OutingsProvider` wraps the Stack (T2: add `AuthProvider` around it too). Only `index` registered; `index.jsx` = plain placeholder again.
-Gotcha: user's phone storage is now `[]` (persistence test) → to see mock data again clear Expo Go storage.
-Gotcha: run lint as `CI=1 npx expo lint` (plain one can hang on a prompt).
-Next (T2): auth flow.
+T0–T2 done. Base: `AppScreen({ children, centered })`, `AppButton({ text, onPress, style, variant, disabled })`, `AppTextInput`; `colors`/`statusColors`/`sizes` in colors.js.
+`useOutings()` → `{ outings, isLoaded, error, addOuting(outing) (assigns id), updateOuting(id, changes), deleteOuting(id), setMyResponse(id, name, response) }`; `error` is a string ("" = none).
+`useAuth()` (`AuthContext.jsx`, default `AuthProvider`) → `{ user: { name, email } | null, login(email, password) → bool, logout() }`. Root: AuthProvider > OutingsProvider > Stack.
+Root Stack registers `index` (Welcome, header hidden), `login` ("Log in"), `(tabs)` (header hidden). T4/T5: register `outing/[id]` + `outing/form` there.
+`(tabs)/_layout.jsx`: guard + Tabs with own header (same colors). `(tabs)/index.jsx` = placeholder Home → T3 replaces it.
+Field-error pattern (login.jsx): `setFieldErrors(z.flattenError(result.error).fieldErrors)` → `{fieldErrors.email && <Text style={styles.error}>{fieldErrors.email[0]}</Text>}`. Reuse in T5.
+Gotchas: phone storage may still be `[]` (clear Expo Go storage for mock data). Lint = `CI=1 npx expo lint`. Back on Home → Welcome (still logged in) — revisit in T6.
+Next (T3): Home list.
 
 ---
 
@@ -26,7 +26,7 @@ Next (T2): auth flow.
   - Temporary: placeholder screen shows `outings.length` and a "Delete all" button.
   - Done when: count shows 8; Delete all → fully close and reopen → still 0. Then remove the temp button.
 
-- [ ] **T2 — Auth flow**
+- [x] **T2 — Auth flow**
   - `src/utils/validation.js` → `loginSchema`. `src/data/mockUser.js`. `src/context/AuthContext.jsx` (wrap in `_layout.jsx`).
   - Welcome screen (app name, one-line pitch, "Get started" → login). Login screen like the class one, but errors under each field + "Email or password is incorrect." Success → `router.replace("/(tabs)")`.
   - `(tabs)/_layout.jsx` with guard + Ionicons. Placeholder Home. Profile: name, email, number of outings, Logout with Alert confirm → `router.replace("/login")`.
