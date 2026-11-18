@@ -34,7 +34,9 @@ export default function LoginScreen() {
       return;
     }
 
-    // replace: the back button must not return to the login screen.
+    // dismissAll removes Welcome + Login from the stack, then replace swaps in the tabs,
+    // so the back button on Home leaves the app instead of going back to Welcome.
+    if (router.canDismiss()) router.dismissAll();
     router.replace("/(tabs)");
   }
 

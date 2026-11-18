@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     borderRadius: sizes.cardRadius,
     borderWidth: 1,
     borderColor: colors.border,
-    padding: sizes.padding,
+    padding: 16,
     marginBottom: 24,
   },
   name: {

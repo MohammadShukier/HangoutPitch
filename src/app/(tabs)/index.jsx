@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: sizes.label,
-    fontWeight: "bold",
+    fontWeight: "600",
     color: colors.text,
     marginTop: 8,
     marginBottom: 4,

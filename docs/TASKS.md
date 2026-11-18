@@ -1,14 +1,13 @@
 # Tasks
 
 ## Handoff (rewritten at the end of every task — max 8 lines)
-T0–T5 done. Base: `AppScreen({ children, centered })`, `AppButton({ text, onPress, style, variant, disabled })`, `AppTextInput`; `colors`/`statusColors`/`sizes` in colors.js.
-`useOutings()` → `{ outings, isLoaded, error, addOuting(outing) (assigns id), updateOuting(id, changes), deleteOuting(id), setMyResponse(id, name, response) }`; `error` is a string ("" = none).
-`useAuth()` → `{ user: { name, email } | null, login, logout }`. Screens outside tabs (`outing/[id]`, `outing/form`) do their own `!user` → `<Redirect href="/login" />`.
-Form: `OutingForm({ initialValues, submitText, onSubmit })` validates with `outingSchema` and passes `result.data` (trimmed, cost as number) to `onSubmit`. Empty cost box = 0 (Free).
-`outing/form.jsx`: add mode (`emptyOuting`, user added as going, "Outing added" Alert → back) / edit mode (`?id=`, `updateOuting` → back). Title via `<Stack.Screen options={{ title }} />` in every branch.
-`error` is shown on Home + Details only (not on the form/profile) — check during T6 save-failure test.
-Gotchas: Lint = `CI=1 npx expo lint`. Back on Home → Welcome (still logged in) — fix in T6.
-Next (T6): Requirements pass.
+T0–T6 done — app is feature-complete and passed the requirements checklist on the phone.
+Routes: Welcome → Login (Zod) → Tabs (Home, Profile) → `outing/[id]` Details → `outing/form` Add/Edit (`?id=` = edit).
+Login does `router.dismissAll()` (if `canDismiss`) + `replace("/(tabs)")` → back on Home exits app. Logout → `replace("/login")`.
+State: `OutingsProvider` (`useOutings()`), `AuthProvider` (`useAuth()`, not persisted). AsyncStorage key `HANGOUTPITCH_OUTINGS`.
+Save failure tested (temp throw removed): red `error` shows on Home + Details; it is never cleared until restart.
+Mock login: demo@hangoutpitch.app / Pitch2026 (name Mohammad). Lint = `CI=1 npx expo lint`.
+Next (T7): Documentation only — README (ask user phone model + OS version), `docs/screen-flow.md`, `docs/VIDEO_NOTES.md`. No code changes.
 
 ---
 
@@ -51,7 +50,7 @@ Next (T6): Requirements pass.
   - Add: user added as "going"; success `Alert` → back. Edit: details screen shows the new data immediately.
   - Header title "New outing" / "Edit outing" (`<Stack.Screen options={{ title }} />` inside the screen).
 
-- [ ] **T6 — Requirements pass**
+- [x] **T6 — Requirements pass**
   - Walk through the checklist below and fix gaps only.
   - Save failure → user sees a message (test by temporarily throwing in the save effect, then remove).
   - Same spacing/typography on all screens; every button works; back navigation is logical everywhere.
