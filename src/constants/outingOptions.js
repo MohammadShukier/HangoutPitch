@@ -12,3 +12,10 @@ export const typeIcons = {
   Movie: "film-outline",
   Other: "sparkles-outline",
 };
+
+// RSVP answers: value is what gets saved, label is what the user sees.
+export const responseOptions = [
+  { value: "going", label: "Going" },
+  { value: "maybe", label: "Maybe" },
+  { value: "cant", label: "Can't" },
+];

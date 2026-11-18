@@ -21,6 +21,7 @@ export default function RootLayout() {
           <Stack.Screen name="login" options={{ title: "Log in" }} />
           {/* The tabs show their own header, so the Stack one is hidden. */}
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="outing/[id]" options={{ title: "Outing details" }} />
         </Stack>
       </OutingsProvider>
     </AuthProvider>

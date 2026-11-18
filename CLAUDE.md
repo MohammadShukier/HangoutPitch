@@ -73,9 +73,15 @@ src/app/outing/form.jsx       Add/Edit — edit mode when ?id= is present
 
 ## File map (keep updated)
 - `src/constants/colors.js` — `colors`, `statusColors`, `sizes`
+- `src/constants/outingOptions.js` — `outingStatuses`, `outingTypes`, `typeIcons`
 - `src/components/AppScreen.jsx` — screen wrapper (bg, ScrollView, padding, `centered`)
 - `src/components/AppButton.jsx` — button (`variant`: primary/secondary/danger, `disabled`)
 - `src/components/AppTextInput.jsx` — styled TextInput, forwards props
+- `src/components/StatusBadge.jsx` — colored status pill `{ status }`
+- `src/components/OutingCard.jsx` — list card `{ outing, onOpen }`
+- `src/components/SearchBar.jsx` — search input `{ value, onChangeText }`
+- `src/components/OutingFilters.jsx` — horizontal chips `{ options, selected, onChange }`
+- `src/components/EmptyState.jsx` — `{ title, message, actionText, onAction }`
 - `src/data/mockOutings.js` — 8 sample outings (default export)
 - `src/data/mockUser.js` — mock account `{ name, email, password }` (default export)
 - `src/context/OutingsContext.jsx` — `OutingsProvider` (default) + `useOutings()`, AsyncStorage load/save
@@ -85,6 +91,6 @@ src/app/outing/form.jsx       Add/Edit — edit mode when ?id= is present
 - `src/app/index.jsx` — Welcome
 - `src/app/login.jsx` — Login (Zod field errors + wrong-credentials message)
 - `src/app/(tabs)/_layout.jsx` — auth guard + Tabs (Home, Profile)
-- `src/app/(tabs)/index.jsx` — placeholder Home (list in T3)
+- `src/app/(tabs)/index.jsx` — Home: New outing, search, status/type filters, cards, 2 empty states, loading, error
 - `src/app/(tabs)/profile.jsx` — name, email, outings count, Logout confirm
 - `eslint.config.js` — created by `expo lint`

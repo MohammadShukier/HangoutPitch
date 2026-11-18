@@ -1,14 +1,14 @@
 # Tasks
 
 ## Handoff (rewritten at the end of every task — max 8 lines)
-T0–T2 done. Base: `AppScreen({ children, centered })`, `AppButton({ text, onPress, style, variant, disabled })`, `AppTextInput`; `colors`/`statusColors`/`sizes` in colors.js.
+T0–T3 done. Base: `AppScreen({ children, centered })`, `AppButton({ text, onPress, style, variant, disabled })`, `AppTextInput`; `colors`/`statusColors`/`sizes` in colors.js.
 `useOutings()` → `{ outings, isLoaded, error, addOuting(outing) (assigns id), updateOuting(id, changes), deleteOuting(id), setMyResponse(id, name, response) }`; `error` is a string ("" = none).
-`useAuth()` (`AuthContext.jsx`, default `AuthProvider`) → `{ user: { name, email } | null, login(email, password) → bool, logout() }`. Root: AuthProvider > OutingsProvider > Stack.
-Root Stack registers `index` (Welcome, header hidden), `login` ("Log in"), `(tabs)` (header hidden). T4/T5: register `outing/[id]` + `outing/form` there.
-`(tabs)/_layout.jsx`: guard + Tabs with own header (same colors). `(tabs)/index.jsx` = placeholder Home → T3 replaces it.
-Field-error pattern (login.jsx): `setFieldErrors(z.flattenError(result.error).fieldErrors)` → `{fieldErrors.email && <Text style={styles.error}>{fieldErrors.email[0]}</Text>}`. Reuse in T5.
-Gotchas: phone storage may still be `[]` (clear Expo Go storage for mock data). Lint = `CI=1 npx expo lint`. Back on Home → Welcome (still logged in) — revisit in T6.
-Next (T3): Home list.
+`useAuth()` → `{ user: { name, email } | null, login(email, password) → bool, logout() }`. Root: AuthProvider > OutingsProvider > Stack (registers `index`, `login`, `(tabs)`). T4/T5: register `outing/[id]` + `outing/form` there.
+`constants/outingOptions.js`: `outingStatuses`, `outingTypes`, `typeIcons`. Reuse for Zod enums (T5) and the form chips.
+Components: `StatusBadge({ status })` (reuse in T4), `OutingCard`, `SearchBar`, `OutingFilters({ options, selected, onChange })` — caller adds "All" itself, so T5 can pass plain options. `EmptyState({ title, message, actionText, onAction })`.
+Home pushes `{ pathname: "/outing/[id]", params: { id } }` and `"/outing/form"` (both unmatched until T4/T5). Field-error pattern in login.jsx — reuse in T5.
+Gotchas: Lint = `CI=1 npx expo lint`. "No outings yet" state untested (needs Delete from T4). Back on Home → Welcome (still logged in) — revisit in T6.
+Next (T4): Details screen.
 
 ---
 
@@ -32,7 +32,7 @@ Next (T3): Home list.
   - `(tabs)/_layout.jsx` with guard + Ionicons. Placeholder Home. Profile: name, email, number of outings, Logout with Alert confirm → `router.replace("/login")`.
   - Done when: wrong/invalid input shows errors; login works; logout works; Android back after logout doesn't re-enter the app.
 
-- [ ] **T3 — Home list**
+- [x] **T3 — Home list**
   - Components: `OutingCard({ outing, onOpen })` (title, type icon, date, location, `StatusBadge`, "X going"), `StatusBadge({ status })`, `SearchBar({ value, onChangeText })`, `OutingFilters({ options, selected, onChange })` (used twice: status row, type row; "All" option; horizontal scroll), `EmptyState({ title, message, actionText, onAction })`.
   - Search by title (case-insensitive) combined with both filters.
   - Two different empty states: "No outings yet" (+ "Pitch an outing") vs "No outings match your search" (+ "Clear filters").
