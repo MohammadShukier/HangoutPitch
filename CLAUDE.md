@@ -98,3 +98,6 @@ src/app/outing/form.jsx       Add/Edit — edit mode when ?id= is present
 - `src/app/outing/[id].jsx` — Details: info, RSVP counts + list, my RSVP, Edit, Delete confirm, not-found
 - `src/app/outing/form.jsx` — Add/Edit screen (edit when `?id=`), not-found, own title
 - `eslint.config.js` — created by `expo lint`
+- `README.md` — project README (setup, features, limitations, folders)
+- `docs/screen-flow.md` — Mermaid screen flow
+- `docs/VIDEO_NOTES.md` — video script + 3 code explanations
