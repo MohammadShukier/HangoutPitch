@@ -2,8 +2,6 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import { colors, sizes } from "../constants/colors";
 import { responseOptions } from "../constants/outingOptions";
 
-// Three RSVP buttons. The current answer (value) is highlighted,
-// and the screen decides what a tap does through onChange.
 export default function ResponseSelector({ value, onChange }) {
   return (
     <View style={styles.row}>

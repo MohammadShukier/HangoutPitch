@@ -1,7 +1,7 @@
-// Sample outings shown on the very first launch (before anything is saved).
 const mockOutings = [
   {
     id: 1,
+    createdBy: "Rawad",
     title: "Sunset hike at Qadisha Valley",
     type: "Hike",
     location: "Qadisha Valley, Bsharri",
@@ -18,6 +18,7 @@ const mockOutings = [
   },
   {
     id: 2,
+    createdBy: "Mohammad",
     title: "Shawarma night at Barbar",
     type: "Food",
     location: "Barbar, Hamra, Beirut",
@@ -35,6 +36,7 @@ const mockOutings = [
   },
   {
     id: 3,
+    createdBy: "Rawad",
     title: "Board game night at Rawad's",
     type: "Game night",
     location: "Rawad's apartment, Achrafieh, Beirut",
@@ -51,6 +53,7 @@ const mockOutings = [
   },
   {
     id: 4,
+    createdBy: "Maya",
     title: "Beach day in Batroun",
     type: "Beach",
     location: "Pierre & Friends, Batroun",
@@ -66,6 +69,7 @@ const mockOutings = [
   },
   {
     id: 5,
+    createdBy: "Hadi",
     title: "New release at VOX Cinemas",
     type: "Movie",
     location: "VOX Cinemas, City Centre Beirut, Hazmieh",
@@ -83,6 +87,7 @@ const mockOutings = [
   },
   {
     id: 6,
+    createdBy: "Jad",
     title: "Visit Jeita Grotto",
     type: "Other",
     location: "Jeita Grotto, Keserwan",
@@ -101,6 +106,7 @@ const mockOutings = [
   },
   {
     id: 7,
+    createdBy: "Nour",
     title: "Seafood lunch in Byblos",
     type: "Food",
     location: "Byblos Fishing Club, Jbeil",
@@ -116,6 +122,7 @@ const mockOutings = [
   },
   {
     id: 8,
+    createdBy: "Mohammad",
     title: "Morning walk at the Cedars of God",
     type: "Hike",
     location: "Cedars of God, Bsharri",

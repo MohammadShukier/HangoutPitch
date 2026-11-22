@@ -21,21 +21,17 @@ export default function LoginScreen() {
 
     const result = loginSchema.safeParse({ email: email.trim(), password });
     if (result.success === false) {
-      // fieldErrors = { email: [...], password: [...] } → one message under each field.
       setFieldErrors(z.flattenError(result.error).fieldErrors);
       return;
     }
     setFieldErrors({});
 
-    // Input is valid, now check it against the mock account.
     const isLoggedIn = login(result.data.email, result.data.password);
     if (!isLoggedIn) {
       setLoginError("Email or password is incorrect.");
       return;
     }
 
-    // dismissAll removes Welcome + Login from the stack, then replace swaps in the tabs,
-    // so the back button on Home leaves the app instead of going back to Welcome.
     if (router.canDismiss()) router.dismissAll();
     router.replace("/(tabs)");
   }

@@ -1,69 +1,97 @@
 # HangoutPitch
 
-A small mobile app for a group of friends. Anyone can **pitch an outing idea** (a hike, a dinner, a game night…), friends **RSVP** with Going / Maybe / Can't, and once enough people are in, the outing is marked **Confirmed**.
+HangoutPitch is a small mobile app for planning outings with friends. Someone pitches an idea, like a hike, a dinner or a game night, and the others answer with Going, Maybe or Can't. Once enough people are in, the outing can be marked as Confirmed.
 
-Individual university project — React Native + Expo SDK 58 + Expo Router, JavaScript.
+This is my individual university project. It is built with React Native, Expo SDK 58 and Expo Router, and written in JavaScript.
 
 ## Who it is for
-Friend groups who keep losing outing ideas in a busy group chat and want one place to see what was suggested, who is going, and what is confirmed.
 
-## Setup
-```bash
+It is for friend groups where outing ideas keep getting lost in the group chat. Instead of scrolling back through old messages, everyone can see in one place what was suggested, who is going and what is already confirmed.
+
+## How to run it
+
+```
 npm install
 npx expo start
 ```
-Scan the QR code with the **Expo Go** app on your phone.
 
-Tested with Expo Go on: **Samsung Galaxy A55 (Android 15)** (Expo SDK 58).
+Then scan the QR code with the Expo Go app on your phone. I tested it with Expo Go on a Samsung Galaxy A55 (Android 15).
 
-## Mock login
-| Email | Password |
-|---|---|
-| `demo@hangoutpitch.app` | `Pitch2026` |
+## Login
 
-The logged-in user is **Mohammad**.
+There is no real sign up, so use the demo account:
+
+- Email: demo@hangoutpitch.app
+- Password: Pitch2026
+
+You will be logged in as Mohammad.
 
 ## Features
-- Welcome screen → login with Zod validation (an error under each field + "Email or password is incorrect.").
-- Tabs: **Home** and **Profile**. Logged-out users are always sent back to Login.
-- **Home**: list of outing cards (type icon, date, location, status, how many are going).
-  - Search by title, plus filter chips for status (Idea / Voting / Confirmed) and type (Hike, Food, Game night, Beach, Movie, Other). Search and filters work together.
-  - Different empty states for "No outings yet" and "No outings match your search".
-  - Loading spinner while saved data is being read.
-- **Details**: all info (cost shows "Free" when 0), RSVP counts + friend list, and your own RSVP buttons.
-- **Add / Edit** outing: one shared form, Zod validation with an error under each invalid field. New outings mark you as "going".
-- **Delete** with a confirmation dialog.
-- **Profile**: name, email, number of outings, Logout with confirmation.
-- **Persistence**: outings are saved with AsyncStorage and restored after a full app restart, including an empty list (sample data is never re-added once you deleted everything).
-- A red error message is shown if loading or saving fails.
+
+- A welcome screen and a login screen. The login form is checked with Zod, so each field shows its own error, and a wrong email or password shows a message as well.
+- Two tabs, Home and Profile. If you are not logged in you get sent back to the login screen.
+- The Home screen shows all outings as cards with the type icon, date, location, status and how many people are going.
+- You can search by title and filter by status (Idea, Voting, Confirmed) and by type (Hike, Food, Game night, Beach, Movie, Other). Search and filters work together.
+- There are two different empty states, one for when there are no outings at all and one for when nothing matches your search.
+- A loading spinner shows while the saved outings are being read.
+- The details screen shows everything about an outing (the cost shows as Free when it is 0), the RSVP counts, the list of friends with their answers, and buttons to set your own RSVP.
+- Adding and editing an outing use the same form, also checked with Zod. When you create an outing you are marked as going automatically.
+- Deleting an outing asks for confirmation first.
+- Every outing shows who pitched it, and only that person sees the Edit and Delete buttons.
+- The Profile screen shows your name, email and number of outings, and has a Logout button that asks before logging you out.
+- Outings are saved with AsyncStorage, so they are still there after you close and reopen the app. This also works for an empty list, so the sample data does not come back after you delete everything.
+- If loading or saving fails, a red error message is shown.
 
 ## Known limitations
-- No backend: data is stored only on this phone (AsyncStorage). Friends never see your changes.
-- Friends and their RSVPs come from mock data; you can't invite real people.
-- One mock account only, no sign-up.
-- Login is not remembered — after a full restart you log in again (your outings are still saved).
-- Dates are typed as `YYYY-MM-DD` (no date picker).
-- Status is changed by hand in the Edit form; it does not switch to Confirmed automatically.
-- A save/load error message stays visible until the app is restarted.
+
+- There is no backend. Everything is stored on the phone only, so your friends never actually see your changes.
+- The friends and their RSVPs are mock data, you can't invite real people.
+- There is only one account and no way to sign up.
+- The login is not remembered. After restarting the app you have to log in again, but your outings are still saved.
+- Dates are typed in by hand as YYYY-MM-DD, there is no date picker.
+- The status is changed by hand in the edit form. It does not switch to Confirmed on its own.
+- If a save or load error happens, the message stays on screen until the app is restarted.
 
 ## Folder structure
+
 ```
 src/
-  app/                 routes only (Expo Router)
-    _layout.jsx        AuthProvider + OutingsProvider + Stack (header style)
-    index.jsx          Welcome
-    login.jsx          Login
-    (tabs)/            _layout.jsx (auth guard + tabs), index.jsx (Home), profile.jsx
-    outing/            [id].jsx (Details), form.jsx (Add/Edit, edit when ?id=)
-  components/          reusable UI: AppScreen, AppButton, AppTextInput, OutingCard,
-                       OutingFilters, OutingForm, ResponseSelector, SearchBar,
-                       StatusBadge, EmptyState
-  context/             OutingsContext.jsx (shared outings + AsyncStorage), AuthContext.jsx
-  data/                mockOutings.js, mockUser.js
-  utils/               validation.js (Zod schemas)
-  constants/           colors.js, outingOptions.js
-docs/                  screen-flow.md, VIDEO_NOTES.md
+  app/              screens and routing (Expo Router)
+    _layout.jsx     providers and the main Stack
+    index.jsx       Welcome
+    login.jsx       Login
+    (tabs)/         Home and Profile tabs, plus the login check
+    outing/         [id].jsx for details, form.jsx for adding and editing
+  components/       reusable parts like buttons, inputs, cards, filters and the outing form
+  context/          OutingsContext (shared outings and saving) and AuthContext
+  data/             mock outings and the mock user
+  utils/            validation.js with the Zod schemas
+  constants/        colors and the outing options
+docs/               screen flow and screenshots
 ```
 
+## Screen flow
+
+The screen flow diagram is in [docs/screen-flow.md](docs/screen-flow.md) (it shows up as a diagram on GitHub). There is also an image version in [docs/screen-flow.png](docs/screen-flow.png).
+
+## Screenshots
+
+| Welcome | Login | Home |
+|---|---|---|
+| ![Welcome](docs/screenshots/01-welcome.png) | ![Login](docs/screenshots/02-login.png) | ![Home](docs/screenshots/03-home.png) |
+
+| Details | Add / Edit | Profile |
+|---|---|---|
+| ![Details](docs/screenshots/04-details.png) | ![Form](docs/screenshots/05-form.png) | ![Profile](docs/screenshots/06-profile.png) |
+
+| Empty list | No search results |
+|---|---|
+| ![Empty](docs/screenshots/07-empty.png) | ![No results](docs/screenshots/08-no-results.png) |
+
 ## Submitted version
-Git tag `v1.0`.
+
+The version I submitted is the commit tagged v1.0 (you can find it under Releases or Tags on GitHub). The ZIP file was made from that same commit with:
+
+```
+git archive -o HangoutPitch.zip v1.0
+```

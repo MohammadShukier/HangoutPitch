@@ -3,7 +3,6 @@ import { StyleSheet, View } from "react-native";
 import { colors } from "../constants/colors";
 import AppTextInput from "./AppTextInput";
 
-// Controlled input: the screen owns the search text and passes it in with value/onChangeText.
 export default function SearchBar({ value, onChangeText }) {
   return (
     <View style={styles.container}>

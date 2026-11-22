@@ -1,13 +1,12 @@
 import { Pressable, ScrollView, StyleSheet, Text } from "react-native";
 import { colors } from "../constants/colors";
 
-// A row of chips. The parent gives the options and which one is selected,
-// and gets told through onChange when the user taps another one.
 export default function OutingFilters({ options, selected, onChange }) {
   return (
     <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
+      style={styles.scroll}
       contentContainerStyle={styles.row}
     >
       {options.map((option) => {
@@ -27,6 +26,9 @@ export default function OutingFilters({ options, selected, onChange }) {
 }
 
 const styles = StyleSheet.create({
+  scroll: {
+    flexGrow: 0,
+  },
   row: {
     paddingVertical: 4,
   },

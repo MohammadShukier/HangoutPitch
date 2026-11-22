@@ -2,7 +2,6 @@ import { StyleSheet, Text, View } from "react-native";
 import { colors, sizes } from "../constants/colors";
 import AppButton from "./AppButton";
 
-// Shown when a list has nothing to display. The button only appears if actionText is given.
 export default function EmptyState({ title, message, actionText, onAction }) {
   return (
     <View style={styles.container}>

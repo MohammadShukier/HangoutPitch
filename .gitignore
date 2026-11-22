@@ -46,4 +46,6 @@ example
 CLAUDE.md
 .claude/
 AGENTS.md
-docs/
+docs/TASKS.md
+docs/CONVENTIONS.md
+docs/VIDEO_NOTES.md

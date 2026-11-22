@@ -1,6 +1,5 @@
-// All colors and sizes live here so every screen looks the same.
 export const colors = {
-  primary: "#D9572B", // sunset orange: header + main buttons
+  primary: "#D9572B",
   background: "#FBF6EF",
   card: "#FFFFFF",
   text: "#2B2118",
@@ -11,7 +10,6 @@ export const colors = {
   white: "#FFFFFF",
 };
 
-// One color per outing status (used by the status badge).
 export const statusColors = {
   Idea: "#5B6CC9",
   Voting: "#C98A12",

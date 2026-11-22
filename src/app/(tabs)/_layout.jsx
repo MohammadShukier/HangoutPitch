@@ -6,12 +6,10 @@ import { useAuth } from "../../context/AuthContext";
 export default function TabsLayout() {
   const { user } = useAuth();
 
-  // Guard: the main screens are only for a logged-in user.
   if (!user) {
     return <Redirect href="/login" />;
   }
 
-  // Same header colors as the root Stack so all screens match.
   return (
     <Tabs
       screenOptions={{

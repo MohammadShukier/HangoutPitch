@@ -10,7 +10,6 @@ export default function ProfileScreen() {
   const { user, logout } = useAuth();
   const { outings } = useOutings();
 
-  // Ask first, so a mis-tap doesn't log the user out.
   function handleLogout() {
     Alert.alert("Log out", "Are you sure you want to log out?", [
       { text: "Cancel", style: "cancel" },
@@ -20,11 +19,9 @@ export default function ProfileScreen() {
 
   function confirmLogout() {
     logout();
-    // replace: the back button must not return into the app.
     router.replace("/login");
   }
 
-  // The tabs guard redirects to login; this just avoids reading user.name on null meanwhile.
   if (!user) return null;
 
   return (

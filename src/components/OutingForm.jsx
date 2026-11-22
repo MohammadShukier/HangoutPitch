@@ -8,13 +8,10 @@ import AppButton from "./AppButton";
 import AppTextInput from "./AppTextInput";
 import OutingFilters from "./OutingFilters";
 
-// One form for both adding and editing. The screen gives the starting values and
-// the button text, and gets the valid data back through onSubmit.
 export default function OutingForm({ initialValues, submitText, onSubmit }) {
   const [title, setTitle] = useState(initialValues.title);
   const [type, setType] = useState(initialValues.type);
   const [location, setLocation] = useState(initialValues.location);
-  // A TextInput works with text, so the cost is kept as a string while typing.
   const [estimatedCost, setEstimatedCost] = useState(String(initialValues.estimatedCost));
   const [date, setDate] = useState(initialValues.date);
   const [status, setStatus] = useState(initialValues.status);
@@ -24,13 +21,11 @@ export default function OutingForm({ initialValues, submitText, onSubmit }) {
   function handleSubmit() {
     const result = outingSchema.safeParse({ title, type, location, estimatedCost, date, status, notes });
     if (result.success === false) {
-      // One message under each invalid field, and nothing is saved.
       setFieldErrors(z.flattenError(result.error).fieldErrors);
       return;
     }
     setFieldErrors({});
 
-    // result.data is the cleaned-up version: text trimmed, cost turned into a number.
     onSubmit(result.data);
   }
 

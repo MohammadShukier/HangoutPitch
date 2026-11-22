@@ -17,7 +17,6 @@ export default function HomeScreen() {
   const [statusFilter, setStatusFilter] = useState("All");
   const [typeFilter, setTypeFilter] = useState("All");
 
-  // The visible list is calculated from the state on every render, so it is never out of date.
   const searchText = search.trim().toLowerCase();
   const visibleOutings = outings.filter((outing) => {
     const matchesSearch = outing.title.toLowerCase().includes(searchText);
@@ -40,7 +39,6 @@ export default function HomeScreen() {
     setTypeFilter("All");
   }
 
-  // Only show the spinner while the saved outings are actually being loaded.
   if (!isLoaded) {
     return (
       <AppScreen centered>

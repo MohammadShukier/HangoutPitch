@@ -6,23 +6,19 @@ const STORAGE_KEY = "HANGOUTPITCH_OUTINGS";
 
 const OutingsContext = createContext(null);
 
-// One parent owns the outings so every screen shows the same data.
 export default function OutingsProvider({ children }) {
   const [outings, setOutings] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState("");
 
-  // Load saved outings once when the app starts.
   useEffect(() => {
     async function loadOutings() {
       try {
         const saved = await AsyncStorage.getItem(STORAGE_KEY);
         if (saved === null) {
-          // Nothing saved yet (first launch) → start with the sample data.
           setOutings(mockOutings);
         } else {
           const parsed = JSON.parse(saved);
-          // A saved [] is kept as empty on purpose: the user deleted everything.
           if (Array.isArray(parsed)) {
             setOutings(parsed);
           }
@@ -36,9 +32,7 @@ export default function OutingsProvider({ children }) {
     loadOutings();
   }, []);
 
-  // Save every time the outings change.
   useEffect(() => {
-    // Wait for the first load, otherwise the empty start state overwrites saved data.
     if (!isLoaded) return;
 
     async function saveOutings() {
@@ -68,7 +62,6 @@ export default function OutingsProvider({ children }) {
     setOutings((current) => current.filter((o) => o.id !== id));
   }
 
-  // Replace the user's RSVP, or add it if they haven't answered yet.
   function setMyResponse(id, name, response) {
     setOutings((current) =>
       current.map((o) => {

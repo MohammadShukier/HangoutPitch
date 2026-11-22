@@ -4,7 +4,6 @@ import { colors, sizes } from "../constants/colors";
 import { typeIcons } from "../constants/outingOptions";
 import StatusBadge from "./StatusBadge";
 
-// One outing in the Home list. The screen decides what "open" does (onOpen callback).
 export default function OutingCard({ outing, onOpen }) {
   const goingCount = outing.responses.filter((r) => r.response === "going").length;
 

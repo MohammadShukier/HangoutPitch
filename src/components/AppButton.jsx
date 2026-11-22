@@ -1,7 +1,6 @@
 import { Pressable, StyleSheet, Text } from "react-native";
 import { colors, sizes } from "../constants/colors";
 
-// variant: "primary" (default), "secondary" or "danger".
 export default function AppButton({ text, onPress, style, variant = "primary", disabled = false }) {
   return (
     <Pressable

@@ -7,7 +7,6 @@ import { colors, sizes } from "../../constants/colors";
 import { useAuth } from "../../context/AuthContext";
 import { useOutings } from "../../context/OutingsContext";
 
-// Starting values for a brand-new outing. Type is empty so the user has to pick one.
 const emptyOuting = {
   title: "",
   type: "",
@@ -23,7 +22,6 @@ export default function OutingFormScreen() {
   const { user } = useAuth();
   const { outings, isLoaded, addOuting, updateOuting } = useOutings();
 
-  // With ?id= we edit that outing, without it we add a new one.
   const isEditMode = id !== undefined;
   const outing = outings.find((o) => o.id === Number(id));
   const screenTitle = isEditMode ? "Edit outing" : "New outing";
@@ -34,18 +32,15 @@ export default function OutingFormScreen() {
   }
 
   function handleAdd(values) {
-    // Whoever pitches the outing is going by default.
-    addOuting({ ...values, responses: [{ name: user.name, response: "going" }] });
+    addOuting({ ...values, createdBy: user.name, responses: [{ name: user.name, response: "going" }] });
     Alert.alert("Outing added", `"${values.title}" was added.`, [{ text: "OK", onPress: goBack }]);
   }
 
   function handleEdit(values) {
-    // Changes go into the shared context, so the details screen shows them right away.
     updateOuting(outing.id, values);
     goBack();
   }
 
-  // This screen is outside the tabs guard, so it checks the user itself.
   if (!user) return <Redirect href="/login" />;
 
   if (!isLoaded) {

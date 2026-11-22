@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import { colors, statusColors } from "../constants/colors";
 
-// Small colored pill: each status has its own color from colors.js.
 export default function StatusBadge({ status }) {
   return (
     <View style={[styles.badge, { backgroundColor: statusColors[status] }]}>

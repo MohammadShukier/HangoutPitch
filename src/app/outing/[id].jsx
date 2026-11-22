@@ -15,8 +15,6 @@ export default function OutingDetailsScreen() {
   const { user } = useAuth();
   const { outings, isLoaded, error, deleteOuting, setMyResponse } = useOutings();
 
-  // Only the id comes through the route; the outing is read from context,
-  // so edits show up here right away. Route params are strings → Number().
   const outing = outings.find((o) => o.id === Number(id));
 
   function goBack() {
@@ -28,7 +26,6 @@ export default function OutingDetailsScreen() {
     router.push({ pathname: "/outing/form", params: { id: outing.id } });
   }
 
-  // Ask first, because deleting can't be undone.
   function handleDelete() {
     Alert.alert("Delete outing", `Delete "${outing.title}"? This can't be undone.`, [
       { text: "Cancel", style: "cancel" },
@@ -49,7 +46,6 @@ export default function OutingDetailsScreen() {
     return responseOptions.find((option) => option.value === value).label;
   }
 
-  // This screen is outside the tabs guard, so it checks the user itself.
   if (!user) return <Redirect href="/login" />;
 
   if (!isLoaded) {
@@ -70,9 +66,9 @@ export default function OutingDetailsScreen() {
     );
   }
 
-  // The user's own RSVP is the entry with their name (undefined = not answered yet).
   const myResponse = outing.responses.find((r) => r.name === user.name)?.response;
   const cost = outing.estimatedCost === 0 ? "Free" : `$${outing.estimatedCost}`;
+  const isCreator = outing.createdBy === user.name;
 
   return (
     <AppScreen>
@@ -100,6 +96,10 @@ export default function OutingDetailsScreen() {
         <View style={styles.infoRow}>
           <Ionicons name="cash-outline" size={18} color={colors.muted} />
           <Text style={styles.info}>{cost}</Text>
+        </View>
+        <View style={styles.infoRow}>
+          <Ionicons name="person-outline" size={18} color={colors.muted} />
+          <Text style={styles.info}>Pitched by {isCreator ? "you" : outing.createdBy}</Text>
         </View>
 
         {outing.notes !== "" && <Text style={styles.notes}>{outing.notes}</Text>}
@@ -130,8 +130,14 @@ export default function OutingDetailsScreen() {
         ))}
       </View>
 
-      <AppButton text="Edit" variant="secondary" onPress={handleEdit} style={styles.button} />
-      <AppButton text="Delete" variant="danger" onPress={handleDelete} style={styles.button} />
+      {isCreator ? (
+        <>
+          <AppButton text="Edit" variant="secondary" onPress={handleEdit} style={styles.button} />
+          <AppButton text="Delete" variant="danger" onPress={handleDelete} style={styles.button} />
+        </>
+      ) : (
+        <Text style={styles.ownerNote}>Only {outing.createdBy} can edit or delete this outing.</Text>
+      )}
     </AppScreen>
   );
 }
@@ -223,6 +229,12 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 12,
+  },
+  ownerNote: {
+    fontSize: sizes.body,
+    color: colors.muted,
+    textAlign: "center",
+    marginTop: 16,
   },
   notFoundTitle: {
     fontSize: sizes.heading,

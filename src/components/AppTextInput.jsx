@@ -1,7 +1,6 @@
 import { StyleSheet, TextInput } from "react-native";
 import { colors, sizes } from "../constants/colors";
 
-// A styled TextInput: every prop (value, onChangeText, placeholder, ...) is passed straight through.
 export default function AppTextInput({ style, ...props }) {
   return (
     <TextInput

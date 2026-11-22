@@ -45,6 +45,7 @@ Once the user confirms the tests pass (or says "skip"):
 ```js
 {
   id: 1,                    // number, Math.max + 1
+  createdBy: "Rawad",       // creator's name; only createdBy === user.name sees Edit/Delete
   title: "Sunset hike at ...",
   type: "Hike",             // Hike | Food | Game night | Beach | Movie | Other
   location: "...",
